@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+.container{
+    width:100%;
+    height:4vmax;
+    background-color: #C08261;
+    display: inline-flex;
+    justify-content: space-between;
+}
+.logo >h2 {
+text-align: center;
+color:white;
+font-family: 'Bad Script', cursive;
+font-size: 1.5vmax;
+padding:1vmax 2vmax;
+cursor: pointer;
+letter-spacing: 2px;
+}
+
+.links ul{
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+.links ul li a{
+    text-decoration: none; /* Remove underline */
+  display: inline-block;
+  padding-right: 1vmax;
+  color:white; /* Set text color */
+  margin-right: 1.5vmax;
+  font-family: 'Bad Script', cursive;
+  font-weight: 600;
+  font-style: 1.2vmax;
+  letter-spacing: 1.5px;
+
+  background-image: linear-gradient(#E2C799, #E2C799);
+  background-size: 0 5px, auto;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  transition: all .3s ease-out;
+}
+.links ul li a:hover{
+    background-size: 100% 5px, auto;
+    
+}
