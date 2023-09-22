@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+.home-container {
+    padding: 0%;
+    margin: 0%;
+    height: 100%;
+    overflow: hidden;
+}
+.home-background {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Prevent scrolling */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+ 
+img {
+    width: 100vw;
+    /* 100% of the viewport width */
+    height: 100vh;
+    /* 100% of the viewport height */
+    opacity: 0.8;
+
+}
+.home-text {
+    position: absolute;
+    top: 42%;
+    left: 29%;
+    background: linear-gradient(45deg, #FDE5EC, #FFD2D7);
+    width:48vmax;
+    height:12vmax;
+    padding:2vmax;
+    border-radius: 8px;
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+    display: block;
+    opacity: 0.8;
+
+}
+.home-text p{
+    font-family: 'Bad Script', cursive;
+    text-align:center;
+    font-size: 1.5vmax;
+    font-weight:900;
+    color: #6C3428;
+    height: max-content;
+    cursor: pointer;
+    padding-bottom: 0.5vmax;
+    animation: fadeIn 0.5s ease-in-out; /* Apply the animation to all paragraphs */
+  animation-fill-mode: forwards; /* Keep the final state of the animation */
+  opacity: 0; /* Start with opacity 0 to make the lines invisible initially */
+}
+
+/* Apply delays to paragraphs */
+.home-text p:nth-child(2) {
+    animation-delay: 1s; /* Delay the second paragraph by 1 second */
+  }
+  
+  .home-text p:nth-child(3) {
+    animation-delay: 2s; /* Delay the third paragraph by 2 seconds */
+  }
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
