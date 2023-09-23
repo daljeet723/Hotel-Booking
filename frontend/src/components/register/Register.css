@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+.register-container {
+    background-color: #343432; /* Outer div background color */
+    height: 100vh; /* Adjust the height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-details {
+    position: absolute;
+    top:15%;
+    left:16%;
+    display: inline-flex;
+    /* justify-content: space-between; */
+    width:68%;
+    height: 33vmax;
+    background-color: white; /* Inner div background color */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners for the inner div */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Optional: Add a box shadow for a 3D effect */
+}
+.register-container >.register-details > .register-left-section{
+    width:102vmax;
+    padding-right:3vmax;
+}
+.register-details > .register-left-section > img{
+    width:32vmax;
+   height:34vmax;
+   margin: 0;
+   
+}
+.register-details > .register-right-section >h2{
+    text-align: center;
+    font-size: 1.8vmax;
+    padding-top: 0.2vmax;
+    padding-left: 0;
+    font-family: 'Bad Script', cursive;
+    cursor: pointer;
+    
+}
+.register-details > .register-right-section{
+    display: flex;
+    flex-direction: column;
+    /* padding-left:2vmax; */
+    margin-left: 3vmax;
+}
+
+.register-form-fields{
+    padding-top:1.2vmax;
+    padding-left: 4.6vmax;
+    height:25vmax;
+}
+/* Additional styling for form inputs and button if needed */
+.register-details form input {
+    width: 24vmax;
+    padding: 0.7vmax;
+    margin-bottom: 1.2vmax;
+   border:1px solid #A8A196;
+    border-radius: 5px;
+    height: 1.4vmax;
+    cursor: pointer;
+    animation: fadeIn 0.5s ease-in-out; /* Apply the animation to all paragraphs */
+    animation-fill-mode: forwards; /* Keep the final state of the animation */
+    opacity: 0;
+}
+input::placeholder{
+    font-size: 1.2vmax;
+}
+.register-details form button {
+    font-size: 1.5vmax;
+    width:26vmax;
+    height: 3.2vmax;
+    margin-bottom: 0;
+    background-color: #75C2F6; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+    animation: fadeIn 0.5s ease-in-out; /* Apply the animation to all paragraphs */
+    animation-fill-mode:forwards; /* Keep the final state of the animation */
+    opacity: 0;
+
+}
+
+.register-details form button:hover {
+    background-color: #555; /* Background color on hover */
+}
+.register-details > .register-right-section > .register-signup{
+    text-align: center;   
+    width:100%;
+}
+.register-right-section > .register-signup >p >span > a{
+    color:#3085C3;
+    font-size: 1.5vmax;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+}
+.register-right-section > .register-signup >p {
+    font-size: 1.5vmax;
+}
+.register-right-section > .register-signup >p >span > a:hover{
+    font-size: 1.8vmax;
+    transition: 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

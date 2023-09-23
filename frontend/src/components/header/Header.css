@@ -7,15 +7,17 @@
 }
 .container{
     width:100%;
-    height:3.6vmax;
-    background-color: #C08261;
+    height:4.2vmax;
+    /* background-color: #C08261; */
+    background-color: #171717;
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
 }
-.logo >h2 {
+.logo >h2 >a{
+  text-decoration: none;
 text-align: center;
-color:white;
+color:#FDE5EC;
 font-family: 'Bad Script', cursive;
 font-size: 1.8vmax;
 padding-left:2vmax;
@@ -33,7 +35,7 @@ letter-spacing: 2.5px;
 .links ul li a{
     text-decoration: none; /* Remove underline */
   padding-right: 0.6vmax;
-  color:white; /* Set text color */
+  color:whitesmoke; /* Set text color */
   margin-right: 2vmax;
   font-family: 'Varela', sans-serif;
   font-weight: 600;
