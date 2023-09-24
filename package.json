@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon backend/server.js"
   },
-  "type":"module",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/daljeet723/Hotel-Booking.git"
@@ -23,6 +23,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.5.2"
+    "mongoose": "^7.5.2",
+    "validator": "^13.11.0"
   }
 }
