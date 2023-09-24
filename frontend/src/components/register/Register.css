@@ -18,11 +18,15 @@
     background-color: white; /* Inner div background color */
     padding: 20px;
     border-radius: 10px; /* Rounded corners for the inner div */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Optional: Add a box shadow for a 3D effect */
+    -webkit-box-shadow: 9px 13px 23px -12px rgba(235,195,235,1);
+-moz-box-shadow: 9px 13px 23px -12px rgba(235,195,235,1);
+box-shadow: 9px 13px 23px -12px rgba(235,195,235,1);
+
 }
 .register-container >.register-details > .register-left-section{
     width:102vmax;
     padding-right:3vmax;
+    overflow: hidden;
 }
 .register-details > .register-left-section > img{
     width:32vmax;
@@ -44,6 +48,7 @@
     flex-direction: column;
     /* padding-left:2vmax; */
     margin-left: 3vmax;
+   
 }
 
 .register-form-fields{

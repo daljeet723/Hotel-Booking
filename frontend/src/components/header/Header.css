@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Varela&display=swap');
-*{
+/* *{
     overflow: hidden;
-}
+} */
 :root {
     --main-primary-color: #FDE5EC;
 }
@@ -13,6 +13,7 @@
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
 }
 .logo >h2 >a{
   text-decoration: none;
