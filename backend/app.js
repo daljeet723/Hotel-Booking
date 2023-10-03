@@ -8,4 +8,7 @@ app.use(express.urlencoded({extended:true, limit:"50mb"}));
 app.use(cookieParser());
 
 import { userRouter } from "./routes/userRoutes.js";
+import { hotelRouter } from "./routes/hotelRoutes.js";
+
 app.use("/api/v1",userRouter);
+app.use("/api/v1",hotelRouter);

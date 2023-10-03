@@ -1,7 +1,12 @@
 import { User } from "../model/User.js"
 import { sendToken } from "../utils/jwtToken.js"
 import { ErrorHandler } from ".././utils/ErrorHandler.js"
-import bcrypt from "bcryptjs";
+
+
+// User Profile
+// Update profile
+//Change password
+// User Favorites: Implement APIs that allow users to save hotels to their favorites or wishlists.
 
 export const registerUser = async (req, res) => {
     try {
@@ -10,7 +15,7 @@ export const registerUser = async (req, res) => {
         const oldUser = await User.findOne({ email });
 
         if (oldUser) {
-            return res.status(409).json({
+            return res.status(401).json({
                 success: false,
                 message: "User already exists. Please Login"
             })
@@ -24,7 +29,7 @@ export const registerUser = async (req, res) => {
         }
 
     } catch (error) {
-        return res.status(400).json({
+        return res.status(500).json({
             success: false,
             message: error.message
         });
@@ -49,18 +54,16 @@ export const userLogin = async (req, res, next) => {
       
         const isPasswordMatched = await user.comparePassword(password);
 
-        if (!isPasswordMatched) {
-          return next(new ErrorHandler("Invalid email or password", 401));
+        if (isPasswordMatched) {
+            sendToken(user, 200, res);
+         
         }
         else{
-            sendToken(user, 200, res);
+            return next(new ErrorHandler("Invali Email or Password", 401));
         }
-      
-       
-         
-
+    
     } catch (error) {
-        return res.status(400).json({
+        return res.status(500).json({
             success: false,
             message: error.message
         })
@@ -72,14 +75,15 @@ export const userLogin = async (req, res, next) => {
 export const getAllUsers = async(req,res)=>{
     try {
         //deducting password from getting details
-        const users = await User.find().select("-password");
+        //const users = await User.find().select("-password");
+        const users = await User.find().select("+password");
 
         return res.status(201).json({
             success:true,
             users
         })
     } catch (error) {
-        return res.status(401).json({
+        return res.status(501).json({
             success:false,
             message:error.message
         })

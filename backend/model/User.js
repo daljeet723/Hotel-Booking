@@ -32,15 +32,35 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) {
-        next();
+
+//a Mongoose pre-save middleware function is used to hash the password before saving it to the database. 
+//Before hashing, it checks that the password length doesn't exceed 12 characters. 
+//If it does, it returns an error, preventing the password from being saved. 
+//Adjust the salt rounds (e.g., 10 in this example) as needed for your security requirements.
+
+userSchema.pre('save', async function (next) {
+    // Only hash the password if it's being modified or is new
+    if (!this.isModified('password')) {
+        return next();
     }
 
-    this.password = await bcrypt.hash(this.password, 10);
+    // Ensure that the password length doesn't exceed 12 characters
+    if (this.password.length > 12) {
+        return next(new Error("Password cannot exceed 12 characters"));
+    }
+
+    try {
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(this.password, 10); // Adjust the salt rounds as needed
+        this.password = hashedPassword;
+        next();
+    } catch (error) {
+        return next(error);
+    }
 });
 
 
+//Create token 
 userSchema.methods.getJWTToken = function () {
     return jwt.sign(
         { id: this.id },
@@ -51,7 +71,18 @@ userSchema.methods.getJWTToken = function () {
 
 //compare user entered pwsd with hashed pswd
 userSchema.methods.comparePassword = async function (password) {
-    return await bcrypt.compare(password, this.password)
+    console.log("Input password: " + password);
+    console.log("Stored hashed password: " + this.password);
+
+    try {
+        const isMatch = await bcrypt.compare(password, this.password);
+        console.log("Password comparison result: " + isMatch);
+
+        return isMatch;
+    } catch (error) {
+        console.error("Error comparing passwords: " + error);
+        throw error; // Rethrow the error for better error handling
+    }
 
 }
 export const User = mongoose.model("User", userSchema);
