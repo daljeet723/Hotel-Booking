@@ -1,0 +1,29 @@
+                    DIFFERENCE B/W req.params and req.id
+
+req.params:
+req.params is used to extract values from the route parameters in the URL.
+For example, in the route definition /users/:id, if a request is made to /users/123, then req.params.id will be 123.
+It is useful for extracting dynamic values from the path of the URL.
+
+req.query:
+req.query is used to extract values from the query parameters in the URL.
+Query parameters are typically appended to the URL using the ? character followed by key-value pairs separated by &.
+For example, in the URL /users?id=123, req.query.id will be 123.
+It is useful for handling optional parameters or parameters that don't necessarily need to be part of the path.
+
+=================================================================================================================================
+
+                MIDDLEWARE IN REDUX
+Middleware (Chef in the Kitchen):
+    Now, think of middleware as the chef in the kitchen. 
+    When an order comes in, the chef (middleware) can do something before the waiter (action) brings it to the customer (reducer).
+
+    In Redux, middleware allows you to do extra stuff between the action being dispatched 
+    and reaching the reducer. 
+    For example, you might want to make an asynchronous call (like fetching data from a server) before updating the state.
+
+Middleware is like the chef in the kitchen who can modify or enhance things before they reach the customer (reducer).
+
+It's handy when you need to do extra work, like making an API call, logging, or transforming data, between dispatching an action and updating the state.
+
+thunk is a popular middleware in Redux that enables handling asynchronous actions.

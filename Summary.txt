@@ -9,3 +9,10 @@ API Documentation: Swagger/OpenAPI (optional)
 Result: Successfully delivered a fully functional hotel management system that improved user engagement, streamlined hotel operations, and provided a secure and responsive booking experience.
 
 Techniques/Tools: Agile development, Git for version control, VS Code for development, Postman for API testing.
+
+========================
+LIBRARIES TO INSTALL FOR REDUX 
+    "redux",
+    "redux-devtools-extension",
+    "redux-thunk",
+    "web-vitals",

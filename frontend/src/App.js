@@ -5,7 +5,7 @@ import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Hotels from './components/hotels/Hotels';
-
+import BookHotel from './components/bookings/BookHotel.js'
 function App() {
   return (
     <Router>
@@ -15,6 +15,7 @@ function App() {
       <Route path ="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/hotels" element={<Hotels/>}/>
+      <Route path = "/bookHotel/:hotelName/:id" element = {<BookHotel/>}/>
     </Routes>
     </Router>
   );
