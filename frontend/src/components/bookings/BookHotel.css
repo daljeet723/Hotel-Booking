@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Varela&display=swap');
+.bookHotel-container{
+    background-color: #363434;
+    height:100%;
+    width:100%;
+    margin:0;
+    padding: 0;
+    letter-spacing: 1px;
+}
+.bookHotel-container > h1{
+/* HOTEL NAME */
+padding: 4vmax 3.5vmax;
+cursor: pointer;
+font-family: 'Bona Nova';
+font-style: normal;
+font-weight: 400;
+font-size: 4vmax;
+color: #EF4E4E;
+mix-blend-mode: normal;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.bookHotel-container > .hero-section{
+    display: inline-flex;
+
+}
+.hero-section > .bookHotel-left-section{
+    width:60%;
+    padding:0 4vmax 2vmax 3.5vmax;
+}
+.hero-section > .bookHotel-left-section > .bookHotel-images >img{
+    width:100%;
+    height:32vmax;
+
+}
+.hero-section > .bookHotel-left-section >.bookHotel-details >.description{
+    padding-top:2vmax;
+   margin:1vmax 0 2vmax 0;
+   padding-bottom: 4vmax;;
+    width:100%;
+    height:16vmax;
+ 
+}
+.hero-section > .bookHotel-left-section >.bookHotel-details >p{
+    padding-top:0.8vmax;
+    width:100%;
+    height:8vmax;
+    line-height: 1.5;
+    color:#A89C9C;
+    font-size: 1.5vmax;
+    font-weight: 400;
+    text-align: justify; 
+    
+}
+.hero-section > .bookHotel-left-section >.bookHotel-details >h2{
+    padding-top:1vmax;
+    color:#C08261;
+    font-size: 3vmax;
+    font-family: 'Adamina';
+    font-weight: 400;
+}
+
+
+/* RIGHT SECTION */
+.hero-section > .bookHotel-right-section{
+background: #252323;
+padding:2vmax  1.5vmax 2vmax 1.5vmax;
+width:25%;
+height:80%;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+
+
+}
+.hero-section > .bookHotel-right-section .reservation-section > h2, .services-section> h2, .bill-section > h2{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 2vmax;
+padding-top:2.5vmax;
+padding-bottom: 1.5vmax;
+/* identical to box height */
+text-align: center;
+color: #FFFEFE;
+mix-blend-mode: normal;
+}
+
+.reservation-section, .services-section{
+    padding-bottom: 2.5vmax;
+border-bottom: 1px solid #454141;
+transform: rotate(0.18deg);
+
+}
+.hero-section > .bookHotel-right-section .reservation-section .top-row, .last-row{
+    display: inline-flex;
+}
+
+.hero-section > .bookHotel-right-section .reservation-section .card{
+width: 11vmax;
+height: 10vmax;
+margin:0.6vmax;
+background: #383434;
+cursor: pointer;
+box-shadow: 0 2.5px 3px rgba(255, 255, 255, 0.2);
+
+}
+
+.hero-section > .bookHotel-right-section .reservation-section .card > h3{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 1vmax;
+line-height: 12px;
+text-align: center;
+color: #FFF3F3;
+padding-top:2vmax;
+
+}
+
+.hero-section > .bookHotel-right-section .reservation-section .card > p{
+    /* 7th Oct, 2023 */
+    font-family: 'Gilda Display', sans-serif;
+font-weight: 500;
+font-size: 1.4vmax;
+line-height: 23px;
+text-align: center;
+color: #E99C9C;
+padding-top:2vmax;
+
+
+}
+
+ ul{
+    padding-left: 2vmax;
+    padding-top:1vmax;
+    list-style-type: none;
+
+}
+ li{
+    display: inline-flex;
+  margin-bottom: 2vmax;
+  justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+}
+
+
+.service-name, .service-price {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2vmax;
+    line-height: 12px;
+    color: #A89C9C;
+   
+  }
+
+.bill-section >p{
+    /* $ 159 / per room */
+    text-align: center;
+    font-family: 'Gilda Display', sans-serif;
+font-style: normal;
+font-weight: normal !important;
+font-size: 2vmax;
+color: #E99C9C;
+cursor: pointer;
+
+
+}
+.bill-section button{
+margin:2.5vmax 1vmax;
+width:22vmax;
+height:5vmax;
+background-color: #E99C9C;
+padding:0.5vmax 1vmax;
+color:white;
+font-size: 2vmax;
+font-weight: 500;
+cursor: pointer;
+transition: transform 0.3s ease-in-out;
+}
+.bill-section button:hover{
+    background-color: transparent;
+    border: 1px solid #E99C9C;
+    color: #E99C9C;
+    transform: scale(1.1); 
+}
+
+
+
+
