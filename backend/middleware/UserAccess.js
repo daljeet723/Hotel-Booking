@@ -18,6 +18,14 @@ try {
     next(); // callback function
 
 } catch (error) {
+    if (error.name === 'TokenExpiredError') {
+        // Handle token expiration separately
+        return res.status(401).json({
+          success: false,
+          message: 'Token has expired. Please log in again.',
+        });
+      }
+      
     return res.status(401).json({
         success: false,
         message: error.message

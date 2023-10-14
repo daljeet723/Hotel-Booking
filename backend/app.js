@@ -9,6 +9,8 @@ app.use(cookieParser());
 
 import { userRouter } from "./routes/userRoutes.js";
 import { hotelRouter } from "./routes/hotelRoutes.js";
+import { bookingRouter } from "./routes/bookingRoutes.js";
 
 app.use("/api/v1",userRouter);
 app.use("/api/v1",hotelRouter);
+app.use("/api/v1",bookingRouter);

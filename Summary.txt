@@ -16,3 +16,33 @@ LIBRARIES TO INSTALL FOR REDUX
     "redux-devtools-extension",
     "redux-thunk",
     "web-vitals",
+
+
+===== POSTMAN REQUEST ======
+
+LOGIN DUMMY
+{ 
+    "email": "maria1212@gmail.com",
+    "password": "maria1212"
+}
+
+BOOK HOTEL POSTMAN 
+{   "hotelInfo":{
+      "hotelName": "Paradise Stay",
+      "city": "Bangalore",
+      "address": "120/1C,Rock street, Bangalore, Karnataka",
+      "phoneNo": 9876543210,
+      "hotel": "6515a1839783eb696302aec4" // Another _id of the associated Hotel model
+    },
+    "checkInDate" :"2023-10-16",
+    "checkOutDate" :"2023-10-18",
+    "noOfGuest" :"2",
+    "paymentInfo":
+        {
+              "id":"12345",
+              "status":"pending"
+        }
+      
+    ,
+    "totalPrice":"2450"
+}

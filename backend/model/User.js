@@ -71,12 +71,12 @@ userSchema.methods.getJWTToken = function () {
 
 //compare user entered pwsd with hashed pswd
 userSchema.methods.comparePassword = async function (password) {
-    console.log("Input password: " + password);
-    console.log("Stored hashed password: " + this.password);
+    // console.log("Input password: " + password);
+    // console.log("Stored hashed password: " + this.password);
 
     try {
         const isMatch = await bcrypt.compare(password, this.password);
-        console.log("Password comparison result: " + isMatch);
+        // console.log("Password comparison result: " + isMatch);
 
         return isMatch;
     } catch (error) {

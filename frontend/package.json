@@ -14,6 +14,7 @@
     "aos": "^2.3.4",
     "axios": "^1.5.0",
     "react": "^18.2.0",
+    "react-datepicker": "^4.18.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-redux": "^8.1.2",
@@ -48,5 +49,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.1.2:4000"
+  "proxy": "http://192.168.1.6:4000"
 }

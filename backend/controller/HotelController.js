@@ -2,13 +2,12 @@ import { Hotel } from "../model/HotelModel.js"
 import { ErrorHandler } from "../utils/ErrorHandler.js";
 
 //ADD HOTEL
-//Update hotel
 //Retrieve a List of Hotels
+//Update hotel
 //Search Hotels:
 //Hotel Images and Media:
 //User Reviews and Ratings:
-//Booking and Reservations: Implement APIs for users to make hotel reservations.
-// This can include checking room availability, booking rooms, and managing reservations
+
 
 //CREATE HOTEL
 export const addHotel = async (req, res) => {

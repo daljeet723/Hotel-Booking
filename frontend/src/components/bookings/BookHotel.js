@@ -1,7 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+
 import "./BookHotel.css"
 import hotels from "../../Images/hotels.jpg"
+
 const BookHotel = () => {
+
+  const [checkInDate, setCheckInDate] = useState(new Date());
+  const [checkOutDate, setCheckOutDate] = useState(new Date());
+  const [guest, setGuest] = useState(1);
+  const [roomType, setRoomType] = useState("");
+
+  const CustomInput = ({ onClick, selectedDate }) => (
+    <input
+      type="text"
+      value={selectedDate ? selectedDate.toDateString() : ''}
+      onClick={onClick}
+      readOnly
+      className='datePicker'
+    />
+  );
+
+
+  const getDayClassName = (date, selectedDate) => {
+    // Add custom styles for selected date
+    return date && selectedDate && date.toDateString() === selectedDate.toDateString()
+      ? 'selected-day'
+      : null;
+  };
+  const increaseGuest = () => {
+    setGuest(guest + 1);
+};
+
+const decreaseGuest = () => {
+    if (guest > 1) {
+        setGuest(guest - 1);
+    }
+};
+
+  const handleNumOfGuestsChange = (e) => {
+    // Ensure that the number of guests is a positive integer
+    const newGuest = parseInt(e.target.value);
+    if (!isNaN(newGuest) && newGuest >= 1) {
+      setGuest(newGuest);
+    }
+  };
+
+  const handleBookNow = () => {
+    alert(checkInDate)
+  }
   return (
     <div className='bookHotel-container'>
       <h1>Hotel Name </h1>
@@ -33,54 +83,90 @@ const BookHotel = () => {
         </div>
 
         <div className='bookHotel-right-section'>
-          <div className='reservation-section'>
-            <h2>Your Reservation</h2>
-            <div className='top-row'>
-              <div className='card'>
-                <h3>CHECK-IN</h3>
-                <p>7th Oct, 2023</p>
+          <form onSubmit={handleBookNow}>
+            <div className='reservation-section'>
+              <h2>Your Reservation</h2>
+
+              <div className='top-row'>
+                <div className='card'>
+                  <h3>CHECK-IN</h3>
+                  <DatePicker
+                    selected={checkInDate}
+                    onChange={(date) => setCheckInDate(date)}
+                    customInput={<CustomInput selectedDate={checkInDate} />}
+                    dayClassName={(date) => getDayClassName(date, checkInDate)}
+                  />
+                  <ExpandMoreIcon className='selectDate' />
+                </div>
+
+                <div className='card'>
+                  <h3>CHECK-OUT</h3>
+                  <DatePicker
+                    selected={checkOutDate}
+                    onChange={(date) => setCheckOutDate(date)}
+                    customInput={<CustomInput selectedDate={checkOutDate} />}
+                    dayClassName={(date) => getDayClassName(date, checkOutDate)}
+                  />
+                  <ExpandMoreIcon className='selectDate' />
+
+                </div>
               </div>
-              <div className='card'>
-                <h3>CHECK-OUT</h3>
-                <p>10th Oct, 2023</p>
+              <div className='last-row'>
+                <div className='card'>
+                  <h3>GUEST</h3>
+                  <div className='guest-card'>
+                    <input type="number"
+                      min="1"
+                      value={guest}
+                      onChange={handleNumOfGuestsChange}
+                    />
+                    <div className='guestBtn'>
+                      <ExpandLessIcon className='quantity' onClick={increaseGuest} />
+                      <ExpandMoreIcon className='quantity' onClick={decreaseGuest}/>
+                    </div>
+                  </div>
+
+                </div>
+                <div className='card'>
+                  <h3>ROOM TYPE</h3>
+                 
+                    <select value={roomType} onChange={setRoomType}>
+                      <option value="">Select Room Type</option>
+                      <option value="single">Single Room</option>
+                      <option value="double">Double Room</option>
+                      <option value="suite">Suite</option>
+                      {/* Add more room types as needed */}
+                    </select>
+                  
+                </div>
               </div>
             </div>
-            <div className='last-row'>
-              <div className='card'>
-                <h3>GUEST</h3>
-                <p>2</p>
-              </div>
-              <div className='card'>
-                <h3>ROOM TYPE</h3>
-                <p>Double Room</p>
-              </div>
+
+            <div className='services-section'>
+              <h2>Extra Services</h2>
+
+              <ul>
+                <li>
+                  <span className="service-name">Cleaning Fee</span>
+                  <span className="service-price">$7</span>
+                </li>
+                <li>
+                  <span className="service-name">Some Activity</span>
+                  <span className="service-price">$13 / per person</span>
+                </li>
+                <li>
+                  <span className="service-name">Parking</span>
+                  <span className="service-price">Free</span>
+                </li>
+              </ul>
             </div>
-          </div>
 
-          <div className='services-section'>
-            <h2>Extra Services</h2>
-
-            <ul>
-              <li>
-                <span className="service-name">Cleaning Fee</span>
-                <span className="service-price">$7</span>
-              </li>
-              <li>
-                <span className="service-name">Some Activity</span>
-                <span className="service-price">$13 / per person</span>
-              </li>
-              <li>
-                <span className="service-name">Parking</span>
-                <span className="service-price">Free</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className='bill-section'>
-            <h2>Your Price</h2>
-            <p>$ 159 / per room</p>
-            <button type="submit">Book Now</button>
-          </div>
+            <div className='bill-section'>
+              <h2>Your Price</h2>
+              <p>$ 159 / per room</p>
+              <button type="submit">Book Now</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

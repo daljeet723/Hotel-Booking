@@ -115,19 +115,60 @@ padding-top:2vmax;
 
 }
 
-.hero-section > .bookHotel-right-section .reservation-section .card > p{
-    /* 7th Oct, 2023 */
+.datePicker{
     font-family: 'Gilda Display', sans-serif;
-font-weight: 500;
-font-size: 1.4vmax;
-line-height: 23px;
-text-align: center;
-color: #E99C9C;
-padding-top:2vmax;
-
+    font-weight: 500;
+    font-size: 1.2vmax;
+    color: #E99C9C;
+    padding:2.2vmax 0 0 1vmax;
+    background-color: transparent;
+    border: none;
+    cursor:pointer;
+}
+.datePicker:focus-visible{
+    outline: none;
+  }
+.selectDate{
+    color:#E99C9C;
+    padding:0.6vmax 1vmax 1vmax 4vmax;
 
 }
-
+.last-row .card .guest-card{
+    display: inline-flex;
+    background-color: transparent;
+}
+.hero-section > .bookHotel-right-section .reservation-section .card .guest-card> input{
+    background-color: transparent;
+    text-align: center;
+    border:none;
+    outline: none;
+    padding:1vmax;
+    margin:1.8vmax 0 0 1.5vmax;
+    width:3vmax;
+    height:0.5vmax;
+    color: #E99C9C;
+    font-size: 1.5vmax;
+}
+.reservation-section .card .guest-card> .guestBtn{
+    padding-top:1vmax;
+    width:3vmax;
+    height:3vmax;
+   
+}
+.reservation-section .card .guest-card .guestBtn > .quantity{
+    color:#E99C9C;
+    padding:0;
+    height:2vmax;
+    
+}
+select{
+    background-color: transparent;
+    color:#E99C9C;
+    padding-top: 2vmax;;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2vmax;
+}
  ul{
     padding-left: 2vmax;
     padding-top:1vmax;
