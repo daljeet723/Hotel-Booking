@@ -1,8 +1,14 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import "./Header.css"
 const Header = () => {
+
+    const navigate = useNavigate();
+    const handleHotelsTabClick = () => {
+        window.location.reload();
+        navigate('/hotels');
+      };
     return (
         <>
             <div className='container'>
@@ -12,7 +18,7 @@ const Header = () => {
                 <div className='links'>
                     <ul>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/hotels">Hotels</Link></li>
+                        <li onClick={handleHotelsTabClick}><Link to="/hotels">Hotels</Link></li>
                         <li><Link to="/bookings">Bookings</Link></li>
                     </ul>
                 </div>

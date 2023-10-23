@@ -12,16 +12,16 @@ import {
     CLEAR_ERRORS
 } from "../constants/HotelConstants.js"
 
-export const hotelList = () => async (dispatch) => {
+export const hotelList = (keyword="") => async (dispatch) => {
     try {
-        console.log('Dispatching ALL_HOTEL_REQUEST');
         dispatch({
             type: ALL_HOTEL_REQUEST
         });
 
-        const { data } = await axios.get("/api/v1/hotels");
+        let link = "/api/v1/hotels?keyword=" + keyword
 
-        console.log('Dispatching ALL_HOTEL_SUCCESS');
+        const { data } = await axios.get(link);
+
         dispatch({
             type: ALL_HOTEL_SUCCESS,
             payload: data.hotels

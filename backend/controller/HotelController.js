@@ -1,10 +1,11 @@
 import { Hotel } from "../model/HotelModel.js"
 import { ErrorHandler } from "../utils/ErrorHandler.js";
+import ApiFeatures from "../utils/ApiFeatures.js";
 
-//ADD HOTEL
-//Retrieve a List of Hotels
-//Update hotel
-//Search Hotels:
+//ADD HOTEL -- done
+//Retrieve a List of Hotels -- done
+//Update hotel --2
+//Search Hotels: -- 3
 //Hotel Images and Media:
 //User Reviews and Ratings:
 
@@ -46,8 +47,22 @@ export const addHotel = async (req, res) => {
 // GET ALL HOTELS
 export const allHotels = async (req, res) => {
     try {
-        const hotels = await Hotel.find();
-        return res.status(200).json({
+        const resultPerPage = 8;
+        const hotelCount = await Hotel.countDocuments();
+        
+        const apiFeatures = new ApiFeatures(Hotel.find(),req.query)
+        .search()
+        .filter();
+        
+
+        //count hotels available after search query
+        let hotels = await apiFeatures.query;
+        let filteredHotelCount = hotels.length;
+
+        //use clone as below query is already executed above
+        hotels = await apiFeatures.query.clone();
+
+         res.status(200).json({
             success: true,
             hotels
         });
