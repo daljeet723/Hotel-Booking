@@ -1,11 +1,23 @@
 import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
 import sample from "../../Images/hotels.jpg"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 
 const HotelCard = ({ hotel }) => {
+
+    const options = {
+        edit: false,
+        // color: "#434242",
+        color: "#B4B4B3",
+        activeColor: "tomato",
+        size: window.innerWidth < 600 ? 20 : 25,// window width < 600 px star size will be 20 else 25 
+        value: 3,
+        isHalf: true,
+        // isHalf ie take value with decimal value also 2.5
+    };
 
     useEffect(() => {
         AOS.init();
@@ -22,6 +34,7 @@ const HotelCard = ({ hotel }) => {
                 <p>Amenties: Bangalore</p>
                 <p>Address: {hotel.address}</p>
                 <p>Contact No: {hotel.phoneNo}</p>
+                <ReactStars {...options} />
             </div>
             <div className='hotel-contact'>
                 <Link to={'/bookHotel/'+hotel.hotelName+'/' + hotel._id}>Book a Room</Link>

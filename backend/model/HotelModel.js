@@ -35,6 +35,10 @@ const hotelSchema = new mongoose.Schema({
             }
         }
     ],
+    ratings:{
+        type:String,
+        default:0
+    },
     reviews: [
         {
             user: {
