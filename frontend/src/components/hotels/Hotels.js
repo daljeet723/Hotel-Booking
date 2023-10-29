@@ -63,8 +63,8 @@ const Hotels = () => {
         if (error) {
             dispatch(clearError());
         }
-        dispatch(hotelList(keyword));
-    }, [dispatch, keyword, error])
+        dispatch(hotelList(keyword,price, selectedCategory, selectedRating));
+    }, [dispatch, keyword, price, selectedCategory, selectedRating, error])
 
 
     return (
@@ -110,6 +110,7 @@ const Hotels = () => {
                         <div>Rs:{price[0]}</div>
                         <div>Rs:{price[1]}</div>
                     </Typography>
+                    <div className='split'></div>
 
                     <Typography className="categoryBox">Category</Typography>
                     <ul className="categoryList">
@@ -123,7 +124,7 @@ const Hotels = () => {
                             </li>
                         })}
                     </ul>
-
+                    <div className='split'></div>
                     <Typography className="categoryBox">Rating</Typography>
                     <Rating className='rating'
                         count={5}
@@ -132,6 +133,7 @@ const Hotels = () => {
                         size={24}
                         activeColor="tomato"
                     />
+                      <div className='split'></div>
                 </div>
             </div>
         </>

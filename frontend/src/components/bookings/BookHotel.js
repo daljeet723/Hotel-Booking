@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -6,13 +7,22 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 import "./BookHotel.css"
 import hotels from "../../Images/hotels.jpg"
+import { useDispatch, useSelector } from 'react-redux';
+import { clearError, hotelDetailAction } from '../../actions/HotelActions';
+
+
 
 const BookHotel = () => {
+  const dispatch = useDispatch();
+
+  const {error, hotelDetail} = useSelector(state => state.hotelDetail);
 
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [guest, setGuest] = useState(1);
   const [roomType, setRoomType] = useState("");
+
+  const {id}= useParams();
 
   const CustomInput = ({ onClick, selectedDate }) => (
     <input
@@ -52,9 +62,18 @@ const decreaseGuest = () => {
   const handleBookNow = () => {
     alert(checkInDate)
   }
+
+  useEffect(()=>{
+    if(error){
+      dispatch(clearError());
+    }
+    dispatch(hotelDetailAction(id))
+  },[dispatch,error])
+
+
   return (
     <div className='bookHotel-container'>
-      <h1>Hotel Name </h1>
+      <h1>{hotelDetail.hotelName}</h1>
       <div className='hero-section'>
         <div className='bookHotel-left-section'>
           <div className='bookHotel-images'>
@@ -71,13 +90,15 @@ const decreaseGuest = () => {
               Nam vitae turpis in est tristique placerat id sed
             </p>
             <h2>Amenties</h2>
-            <p>Amenties detail</p>
-
-            <h2>Availability</h2>
-            <p>Availability detail</p>
+            <p>{hotelDetail.description}</p>
 
             <h2>Location</h2>
-            <p>location detail</p>
+            <p>You can find us at: {hotelDetail.city}</p>
+            <p>{hotelDetail.address}</p>
+
+            <h2>Availbility</h2>
+            <p>Our rooms starts at price: {hotelDetail.price} Rs/-</p>
+            <p>Feel free to contact us at: {hotelDetail.phoneNo}</p>
 
           </div>
         </div>

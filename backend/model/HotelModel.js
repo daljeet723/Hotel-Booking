@@ -23,6 +23,10 @@ const hotelSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please enter your contact details"],
     },
+    price: {
+        type: Number,
+        required: [true, "Please enter your starting prices"],
+    },
     image: [ // willbe array of object because of multiple images
         {   //when host in cloud will get public id and url
             public_id: {

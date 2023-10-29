@@ -14,7 +14,7 @@ const HotelCard = ({ hotel }) => {
         color: "#B4B4B3",
         activeColor: "tomato",
         size: window.innerWidth < 600 ? 20 : 25,// window width < 600 px star size will be 20 else 25 
-        value: 3,
+        value: hotel.ratings,
         isHalf: true,
         // isHalf ie take value with decimal value also 2.5
     };
@@ -30,14 +30,18 @@ const HotelCard = ({ hotel }) => {
             </div>
             <div className='hotel-details'>
                 <h2> {hotel.hotelName}</h2>
+              
                 <p>City:{hotel.city}</p>
-                <p>Amenties: Bangalore</p>
+                {/* <p>Amenties: Bangalore</p> */}
                 <p>Address: {hotel.address}</p>
-                <p>Contact No: {hotel.phoneNo}</p>
-                <ReactStars {...options} />
+                <p>Contact: {hotel.phoneNo}</p>
+                <h3>Starting price: &#8377;{hotel.price} </h3>
+                <ReactStars {...options} /> 
+                
+                
             </div>
             <div className='hotel-contact'>
-                <Link to={'/bookHotel/'+hotel.hotelName+'/' + hotel._id}>Book a Room</Link>
+                <Link to={'/hotel/'+hotel._id}>Book a Room</Link>
                 <Link to="/addReview">Add Review</Link>
                 <Link to="/viewReview">View Review</Link>
             </div>

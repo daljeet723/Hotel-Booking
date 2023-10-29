@@ -4,10 +4,11 @@ import thunk from 'redux-thunk';
 //composeWithDevTools: This is from the Redux DevTools extension, 
 //providing a way to connect your Redux store to the DevTools for debugging.
 import {composeWithDevTools} from "redux-devtools-extension";
-import {hotelsReducer} from "./reducers/HotelReducers.js";
+import {hotelDetailReducer, hotelsReducer} from "./reducers/HotelReducers.js";
 
 const reducer = combineReducers({
-    hotels : hotelsReducer
+    hotels : hotelsReducer,
+    hotelDetail : hotelDetailReducer
 });
 
 let initialState ={};

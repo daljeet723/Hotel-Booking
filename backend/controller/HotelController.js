@@ -105,6 +105,23 @@ export const updateHotel = async (req, res,next) => {
     }
 }
 
+export const getHotelDetail =async (req, res, next)=>{
+    try {
+        const hotelDetail = await Hotel.findById(req.params.id);
+        if(!hotelDetail){
+            return next(new ErrorHandler("Hotel Not Found", 404))
+        }
+        res.status(200).json({
+            success:true,
+            hotelDetail
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
 
 
 //Payment Integration

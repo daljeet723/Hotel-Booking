@@ -6,7 +6,7 @@
 }
 
 .hotels-container>.heading {
-    height: 12vmax;
+    height: 13vmax;
     /* background-color:#7D7C7C; */
     background-color: #171717;
     padding: 3vmax;
@@ -63,6 +63,7 @@
     flex-direction: column;
     background-color: #272829;
     padding: 2vmax;
+    height:100vh;
 }
 
 .hotels-container>.hotels-list>.hotels-card {
@@ -70,7 +71,7 @@
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
-    width:50vmax;
+    width:48vmax;
     text-decoration: none;
     padding: 1.5vmax;
     border-radius: 10px;
@@ -91,7 +92,7 @@
 }
 .hotels-container>.hotels-list>.hotels-card > .hotel-details{
     margin-left:2.5vmax;
-    width:50%;
+    width:48%;
 }
 
 .hotels-container>.hotels-list>.hotels-card > .hotel-details >h2{
@@ -102,13 +103,21 @@
 }
 
 .hotels-card > .hotel-details >p{
-    font-size: 1.5vmax;
+    font-size: 1.3vmax;
     font-weight: 500;
     letter-spacing: 1px;
     color: #6C3428;
+    padding-bottom: 0.5vmax;
     text-decoration: none;
   }
-  
+
+  .hotels-card > .hotel-details >h3{
+    color:#6C3428;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 1px;
+  } 
+
 .hotel-contact{
     display: flex;
     flex-direction: column;
@@ -118,7 +127,7 @@
 .hotel-contact >a{
     background-color:transparent;
    color: #461959;
-   padding:0.5vmax 1vmax;
+   padding:0.5vmax 0.5vmax;
    text-decoration: none;
     margin-bottom:1vmax;
     border-radius: 6px;
@@ -141,6 +150,11 @@
     left: 3.5vmax;
     min-height: 35vmax;
   }
+  .filterBox> .split{
+    height:0.5vmax;
+    margin-top:1.5vmax;
+    border-bottom: 1px solid #45474B;
+  }
   .filterBox > p{
     color:#FFD2D7;
     font-size: 1.5vmax;
@@ -150,6 +164,7 @@
     justify-content: space-between;
     font: 400 1vmax "Roboto";
     color: white;
+   
   }
   
   .filterBox > .filterPrice > div{

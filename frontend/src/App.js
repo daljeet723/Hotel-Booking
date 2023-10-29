@@ -16,7 +16,7 @@ function App() {
       <Route path="/register" element={<Register/>}/>
       <Route path="/hotels" element={<Hotels/>}/>
       <Route path="/hotels/:keyword" element={<Hotels/>}/>
-      <Route path = "/bookHotel/:hotelName/:id" element = {<BookHotel/>}/>
+      <Route path = "/hotel/:id" element = {<BookHotel/>}/>
     </Routes>
     </Router>
   );
