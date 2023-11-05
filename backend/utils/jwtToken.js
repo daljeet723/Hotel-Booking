@@ -9,6 +9,7 @@ export const sendToken = (user, statusCode, res) => {
 
     res.status(statusCode).cookie('token', token, options).json({
         status: true,
+        message: "Logged in successfully",
         user,
         token
     });

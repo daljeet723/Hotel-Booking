@@ -15,6 +15,13 @@
     align-items: center;
     overflow: hidden;
 }
+.container >.welcome >p{
+  font-size: 1.2vmax;
+  color:#FDE5EC;
+  position:absolute;
+  right:11vmax;
+  top:1.5vmax;
+}
 .logo >h2 >a{
   text-decoration: none;
 text-align: center;
