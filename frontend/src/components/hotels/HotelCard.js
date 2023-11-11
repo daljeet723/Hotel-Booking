@@ -42,8 +42,8 @@ const HotelCard = ({ hotel }) => {
             </div>
             <div className='hotel-contact'>
                 <Link to={'/hotel/'+hotel._id}>Book a Room</Link>
-                <Link to="/addReview">Add Review</Link>
-                <Link to="/viewReview">View Review</Link>
+                <Link to="/addReview">Reviews</Link>
+                <Link to="/viewReview">Add to Favourites</Link>
             </div>
 
         </div >

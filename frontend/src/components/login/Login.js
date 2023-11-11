@@ -24,6 +24,7 @@ const Login = () => {
           console.error('Error:', error);
         } else if (message === 'Logged in successfully') {
           // Redirect to the hotels page upon successful login
+          console.log("message :"+message);
           dispatch({ type: 'CLEAR_ERRORS' });
           navigate('/hotels'); // Use navigate instead of history.push
         }

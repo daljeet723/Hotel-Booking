@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Link ,useNavigate} from "react-router-dom";
 import login from "../../Images/login.jpg"
 import "./Register.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { userRegister } from '../../actions/UserActions';
 const Register = () => {
 
     const [name, setName] = useState("");
@@ -10,10 +12,28 @@ const Register = () => {
     const [phoneNo, setPhoneNo] = useState("");
     const [password, setPassword] = useState("");
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const {message, error, user} = useSelector((state)=>state.user);
+
     const submitHandler = async (e) => {
         e.preventDefault();
-        alert("Regsiter");
+        dispatch(userRegister(name, address, phoneNo, email, password));
+        console.log("message :"+message);
+
     }
+
+    useEffect(() => {
+        if (error) {
+          console.error('Error:', error);
+        } else if (message === 'Logged in successfully') {
+          // Redirect to the hotels page upon successful login
+          dispatch({ type: 'CLEAR_ERRORS' });
+          navigate('/hotels'); // Use navigate instead of history.push
+        }
+      }, [error, message, navigate, dispatch]);
+
     return (
         <>
             <div className='register-container'>
@@ -57,6 +77,7 @@ const Register = () => {
                         </div>
                         <div className='register-signup'>
                             <p><span><Link to="/login">Login</Link></span> with your existing account.</p>
+                            {error && <div className='error-message'>{error}</div>}
                         </div>
 
                     </div>

@@ -110,7 +110,12 @@ input::placeholder{
     font-size: 1.8vmax;
     transition: 0.5s ease-in-out;
 }
-
+.error-message{
+    font-size: 1vmax;
+    color: darkred;
+    letter-spacing: 1px;
+    padding-top:1vmax;
+}
 @keyframes fadeIn {
     0% {
       opacity: 0;

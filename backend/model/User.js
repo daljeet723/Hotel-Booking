@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     },
     "phoneNo": {
         type: Number,
-        required: [true, "Please enter your name"],
+        required: [true, "Please enter your Contact details"],
         maxLength: [10, "Length should not exceed 10 digits"]
     },
     "email": {
@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please Enter Your Password"],
         minLength: [8, "Password should be atleast 8 characters"],
-        maxLength: [12, "Password cannot exceed 12 characters"],
         select: false
     }
 });
@@ -45,8 +44,8 @@ userSchema.pre('save', async function (next) {
     }
 
     // Ensure that the password length doesn't exceed 12 characters
-    if (this.password.length > 12) {
-        return next(new Error("Password cannot exceed 12 characters"));
+    if (this.password.length < 8) {
+        return next(new Error("Password should be atleast 8 characters"));
     }
 
     try {
