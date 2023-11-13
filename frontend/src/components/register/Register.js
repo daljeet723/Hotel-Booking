@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import login from "../../Images/login.jpg"
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import "./Register.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { userRegister } from '../../actions/UserActions';
@@ -11,28 +13,32 @@ const Register = () => {
     const [address, setAddress] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const {message, error, user} = useSelector((state)=>state.user);
+    const { message, error, user } = useSelector((state) => state.user);
 
+    const handleTogglePassword = (e) => {
+        setShowPassword(!showPassword)
+    }
     const submitHandler = async (e) => {
         e.preventDefault();
         dispatch(userRegister(name, address, phoneNo, email, password));
-        console.log("message :"+message);
+        console.log("message :" + message);
 
     }
 
     useEffect(() => {
         if (error) {
-          console.error('Error:', error);
+            console.error('Error:', error);
         } else if (message === 'Logged in successfully') {
-          // Redirect to the hotels page upon successful login
-          dispatch({ type: 'CLEAR_ERRORS' });
-          navigate('/hotels'); // Use navigate instead of history.push
+            // Redirect to the hotels page upon successful login
+            dispatch({ type: 'CLEAR_ERRORS' });
+            navigate('/hotels'); // Use navigate instead of history.push
         }
-      }, [error, message, navigate, dispatch]);
+    }, [error, message, navigate, dispatch]);
 
     return (
         <>
@@ -45,7 +51,7 @@ const Register = () => {
                         <h2>BonStay with Us</h2>
                         <div className='register-form-fields'>
                             <form onSubmit={submitHandler}>
-                            <input type="text"
+                                <input type="text"
                                     placeholder="Name"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
@@ -66,11 +72,16 @@ const Register = () => {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <input type="password"
+                                <input type={showPassword ? "text" : "password"}
                                     placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
+                                {showPassword ? <RemoveRedEyeOutlinedIcon className='show-password-icon'
+                                    onClick={handleTogglePassword} /> :
+                                    <VisibilityOffOutlinedIcon className='show-password-icon'
+                                        onClick={handleTogglePassword} />
+                                }
                                 <button type="submit">
                                     Regsiter</button>
                             </form>
