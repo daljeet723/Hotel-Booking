@@ -18,7 +18,7 @@ const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { message, error, user } = useSelector((state) => state.user);
+    const { message, error} = useSelector((state) => state.user);
 
     const handleTogglePassword = (e) => {
         setShowPassword(!showPassword)
@@ -77,9 +77,9 @@ const Register = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                {showPassword ? <RemoveRedEyeOutlinedIcon className='show-password-icon'
+                                {showPassword ? <RemoveRedEyeOutlinedIcon className='register-show-password-icon'
                                     onClick={handleTogglePassword} /> :
-                                    <VisibilityOffOutlinedIcon className='show-password-icon'
+                                    <VisibilityOffOutlinedIcon className='register-show-password-icon'
                                         onClick={handleTogglePassword} />
                                 }
                                 <button type="submit">

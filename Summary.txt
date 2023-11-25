@@ -37,6 +37,7 @@ BOOK HOTEL POSTMAN
     "checkInDate" :"2023-10-16",
     "checkOutDate" :"2023-10-18",
     "noOfGuest" :"2",
+    "roomType":"Single Room"
     "paymentInfo":
         {
               "id":"12345",

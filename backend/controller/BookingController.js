@@ -6,12 +6,10 @@ import { Booking } from "../model/Booking.js"
 export const bookHotel = async (req, res) => {
     try {
         const { checkInDate, checkOutDate, noOfGuest, roomType,
-            cleaningFee, activities, parking,
             paymentInfo,hotelInfo, totalPrice } = req.body;
 
         const booking = await Booking.create({
             checkInDate, checkOutDate, noOfGuest, roomType,
-            cleaningFee, activities, parking,
             paymentInfo, totalPrice,
             hotelInfo,
             bookAt: Date.now(),

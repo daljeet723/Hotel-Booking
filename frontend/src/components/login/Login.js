@@ -65,14 +65,17 @@ const Login = () => {
                                     placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
+                                    
                                 />
                                 {showPassword ? <RemoveRedEyeOutlinedIcon className='show-password-icon'
                                     onClick={handleTogglePassword} /> :
                                     <VisibilityOffOutlinedIcon className='show-password-icon'
                                         onClick={handleTogglePassword} />
                                 }
+                                <p className='forgot-password'><Link to="/forgotPassword">Forgot Password?</Link></p>
                                 <button type="submit" className='submitBtn'>
-                                    Login</button>
+                                    Log in</button>
+                                   
                             </form>
                         </div>
                         <div className='signup'>

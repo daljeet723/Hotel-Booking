@@ -1,8 +1,7 @@
 .hotels-container {
     background-color: #9E9FA5;
-    /* background-color: #7D7C7C; */
-
-    height: 100%;
+    height: 100vh;
+    
 }
 
 .hotels-container>.heading {
@@ -58,12 +57,14 @@
 }
 .hotels-container>.hotels-list {
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     display: flex;
     flex-direction: column;
     background-color: #272829;
     padding: 2vmax;
-    height:100vh;
+    height:100%;
+    /* flex-grow: 1; */
+    overflow:scroll;
 }
 
 .hotels-container>.hotels-list>.hotels-card {
@@ -100,7 +101,9 @@
   padding-bottom: 0.8vmax;
   color:#461959;
   cursor: pointer;
+  display: inline-flex;
 }
+
 
 .hotels-card > .hotel-details >p{
     font-size: 1.3vmax;
@@ -110,13 +113,6 @@
     padding-bottom: 0.5vmax;
     text-decoration: none;
   }
-
-  .hotels-card > .hotel-details >h3{
-    color:#6C3428;
-    font-weight: 500;
-    font-style: italic;
-    letter-spacing: 1px;
-  } 
 
 .hotel-contact{
     display: flex;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -11,18 +11,47 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearError, hotelDetailAction } from '../../actions/HotelActions';
 
 
-
 const BookHotel = () => {
   const dispatch = useDispatch();
 
-  const {error, hotelDetail} = useSelector(state => state.hotelDetail);
+  const { error, hotelDetail } = useSelector(state => state.hotelDetail);
+  //const isAuthenticated = useSelector((state) => state.auth.isUserLogin);
+  const navigate = useNavigate();
 
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [guest, setGuest] = useState(1);
   const [roomType, setRoomType] = useState("");
 
-  const {id}= useParams();
+
+  let totalCost = "";
+
+  // Calculate number of nights
+  let numberOfNights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+
+  // Check if hotelDetail and roomTypes are defined
+  if (hotelDetail && hotelDetail.roomTypes) {
+    // Find the selected room type in the Redux state
+    let selectedRoomType = hotelDetail.roomTypes.find((room) => room.type === roomType);
+
+    // Check if the room type is found
+    if (selectedRoomType) {
+      // Calculate base room cost
+      let baseRoomCost = selectedRoomType.price * numberOfNights;
+
+      // Adjust for the number of guests
+      totalCost = baseRoomCost * guest;
+    } else {
+      // Handle the case where the room type is not found
+      console.error("Room type not found in hotel details:", roomType);
+    }
+  } else {
+    // Handle the case where hotelDetail or roomTypes is undefined
+    console.error("Hotel details or room types are undefined.");
+  }
+
+
+  const { id } = useParams();
 
   const CustomInput = ({ onClick, selectedDate }) => (
     <input
@@ -43,13 +72,13 @@ const BookHotel = () => {
   };
   const increaseGuest = () => {
     setGuest(guest + 1);
-};
+  };
 
-const decreaseGuest = () => {
+  const decreaseGuest = () => {
     if (guest > 1) {
-        setGuest(guest - 1);
+      setGuest(guest - 1);
     }
-};
+  };
 
   const handleNumOfGuestsChange = (e) => {
     // Ensure that the number of guests is a positive integer
@@ -59,16 +88,16 @@ const decreaseGuest = () => {
     }
   };
 
-  const handleBookNow = () => {
-    alert(checkInDate)
+  const handleReserve = () => {
+    alert("reserve")
   }
 
-  useEffect(()=>{
-    if(error){
+  useEffect(() => {
+    if (error) {
       dispatch(clearError());
     }
     dispatch(hotelDetailAction(id))
-  },[dispatch,error])
+  }, [dispatch, error])
 
 
   return (
@@ -97,14 +126,37 @@ const decreaseGuest = () => {
             <p>{hotelDetail.address}</p>
 
             <h2>Availbility</h2>
-            <p>Our rooms starts at price: {hotelDetail.price} Rs/-</p>
-            <p>Feel free to contact us at: {hotelDetail.phoneNo}</p>
+            <p>Our rooms starts at price: ₹ {hotelDetail.price} </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Room Type</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {hotelDetail.roomTypes && hotelDetail.roomTypes.length > 0 ?
+                  (
+                    hotelDetail.roomTypes.map((roomType) => (
+                      <tr key={roomType.type}>
+                        <td>{roomType.type}</td>
+                        <td>₹ {roomType.price}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="2">No room types available</td>
+                    </tr>
+                  )}
+              </tbody>
+            </table>
+            <p>For more details contact us at: {hotelDetail.phoneNo}</p>
 
           </div>
         </div>
 
         <div className='bookHotel-right-section'>
-          <form onSubmit={handleBookNow}>
+          <form onSubmit={handleReserve}>
             <div className='reservation-section'>
               <h2>Your Reservation</h2>
 
@@ -143,22 +195,26 @@ const decreaseGuest = () => {
                     />
                     <div className='guestBtn'>
                       <ExpandLessIcon className='quantity' onClick={increaseGuest} />
-                      <ExpandMoreIcon className='quantity' onClick={decreaseGuest}/>
+                      <ExpandMoreIcon className='quantity' onClick={decreaseGuest} />
                     </div>
                   </div>
 
                 </div>
                 <div className='card'>
                   <h3>ROOM TYPE</h3>
-                 
-                    <select value={roomType} onChange={setRoomType}>
-                      <option value="">Select Room Type</option>
-                      <option value="single">Single Room</option>
-                      <option value="double">Double Room</option>
-                      <option value="suite">Suite</option>
-                      {/* Add more room types as needed */}
-                    </select>
-                  
+
+                  <select value={roomType} onChange={(e) => setRoomType(e.target.value)}>
+                    {hotelDetail &&
+                      hotelDetail.roomTypes &&
+                      hotelDetail.roomTypes.length > 0 &&
+                      hotelDetail.roomTypes.map((roomTypeOption) => (
+                        <option key={roomTypeOption.type} value={roomTypeOption.type}>
+                          {roomTypeOption.type}
+                        </option>
+                      ))}
+                  </select>
+                  {/* <ExpandMoreIcon className='selectDate' /> */}
+
                 </div>
               </div>
             </div>
@@ -169,11 +225,11 @@ const decreaseGuest = () => {
               <ul>
                 <li>
                   <span className="service-name">Cleaning Fee</span>
-                  <span className="service-price">$7</span>
+                  <span className="service-price">₹ 7</span>
                 </li>
                 <li>
                   <span className="service-name">Some Activity</span>
-                  <span className="service-price">$13 / per person</span>
+                  <span className="service-price">₹ 13 / per person</span>
                 </li>
                 <li>
                   <span className="service-name">Parking</span>
@@ -184,8 +240,8 @@ const decreaseGuest = () => {
 
             <div className='bill-section'>
               <h2>Your Price</h2>
-              <p>$ 159 / per room</p>
-              <button type="submit">Book Now</button>
+              <p>₹ {totalCost}</p>
+              <button type="submit">Reserve</button>
             </div>
           </form>
         </div>

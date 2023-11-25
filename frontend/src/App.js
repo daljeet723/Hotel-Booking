@@ -5,7 +5,8 @@ import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Hotels from './components/hotels/Hotels';
-import BookHotel from './components/bookings/BookHotel.js'
+import BookHotel from './components/bookings/BookHotel.js';
+import ForgetPassword from './components/forgetPassword/ForgetPassword.js';
 function App() {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App() {
       <Route path="/hotels" element={<Hotels/>}/>
       <Route path="/hotels/:keyword" element={<Hotels/>}/>
       <Route path = "/hotel/:id" element = {<BookHotel/>}/>
+      <Route path = "forgotPassword" element ={<ForgetPassword/>}/>
     </Routes>
     </Router>
   );

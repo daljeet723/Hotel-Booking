@@ -72,6 +72,20 @@ box-shadow: 9px 13px 23px -12px rgba(235,195,235,1);
 input::placeholder{
     font-size: 1.2vmax;
 }
+form >.register-show-password-icon{
+    color:#61677A;
+    width:2vmax;
+    position: absolute; /* Add this line */
+    right: 9.2vmax; /* Adjust the right position as needed */
+    top: 65%; /* Center the icon vertically */
+    transform: translateY(-50%); /* Center the icon vertically */
+    cursor: pointer;
+    animation: fadeIn 0.5s ease-in-out;
+    /* Apply the animation to all paragraphs */
+    animation-fill-mode: forwards;
+    /* Keep the final state of the animation */
+    opacity: 0;
+}
 .register-details form button {
     font-size: 1.5vmax;
     width:26vmax;
@@ -105,6 +119,7 @@ input::placeholder{
 }
 .register-right-section > .register-signup >p {
     font-size: 1.5vmax;
+    color:#343432;
 }
 .register-right-section > .register-signup >p >span > a:hover{
     font-size: 1.8vmax;
