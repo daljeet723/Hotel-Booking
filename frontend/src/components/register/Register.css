@@ -13,10 +13,10 @@
     left:16%;
     display: inline-flex;
     /* justify-content: space-between; */
-    width:68%;
+    width:64%;
     height: 33vmax;
     background-color: white; /* Inner div background color */
-    padding: 20px;
+    padding: 0.8vmax;
     border-radius: 10px; /* Rounded corners for the inner div */
     -webkit-box-shadow: 9px 13px 23px -12px rgba(235,195,235,1);
 -moz-box-shadow: 9px 13px 23px -12px rgba(235,195,235,1);
@@ -25,7 +25,7 @@ box-shadow: 9px 13px 23px -12px rgba(235,195,235,1);
 }
 .register-container >.register-details > .register-left-section{
     width:102vmax;
-    padding-right:3vmax;
+    padding-right:8vmax;
     overflow: hidden;
 }
 .register-details > .register-left-section > img{
@@ -46,8 +46,8 @@ box-shadow: 9px 13px 23px -12px rgba(235,195,235,1);
 .register-details > .register-right-section{
     display: flex;
     flex-direction: column;
-    /* padding-left:2vmax; */
-    margin-left: 3vmax;
+    justify-content: center;
+    align-items: center;
    
 }
 
@@ -76,8 +76,8 @@ form >.register-show-password-icon{
     color:#61677A;
     width:2vmax;
     position: absolute; /* Add this line */
-    right: 9.2vmax; /* Adjust the right position as needed */
-    top: 65%; /* Center the icon vertically */
+    right: 6vmax; /* Adjust the right position as needed */
+    top: 68%; /* Center the icon vertically */
     transform: translateY(-50%); /* Center the icon vertically */
     cursor: pointer;
     animation: fadeIn 0.5s ease-in-out;

@@ -7,6 +7,8 @@ import Register from './components/register/Register';
 import Hotels from './components/hotels/Hotels';
 import BookHotel from './components/bookings/BookHotel.js';
 import ForgetPassword from './components/forgetPassword/ForgetPassword.js';
+import ResetPassword from "./components/forgetPassword/ResetPassword.js";
+import OtpVerification from "./components/forgetPassword/OtpVerification.js";
 function App() {
   return (
     <Router>
@@ -18,7 +20,9 @@ function App() {
       <Route path="/hotels" element={<Hotels/>}/>
       <Route path="/hotels/:keyword" element={<Hotels/>}/>
       <Route path = "/hotel/:id" element = {<BookHotel/>}/>
-      <Route path = "forgotPassword" element ={<ForgetPassword/>}/>
+      <Route path = "/forgotPassword" element ={<ForgetPassword/>}/>
+      <Route path ="/resetPassword" element ={<ResetPassword/>}/>
+      <Route path ="/OtpVerification" element ={<OtpVerification/>}/>
     </Routes>
     </Router>
   );
