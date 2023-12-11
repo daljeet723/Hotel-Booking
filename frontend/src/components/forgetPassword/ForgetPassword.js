@@ -1,15 +1,32 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import verifyEmail from "../../Images/verifyEmail.jpg";
+import {clearError, userForgotPassword} from "../../actions/UserActions";
 import "./ForgetPassword.css";
+import { useDispatch, useSelector } from 'react-redux';
 
 const ForgetPassword = () => {
 
-  const [email, setEmail] = useState("");
   const navigate = useNavigate();
-  const submitHandler =()=>{
-    navigate("/OtpVerification");
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const { error, success, isAuthenticated} = useSelector(state => state.forgotPassword)
+
+  const submitHandler =(e)=>{
+    e.preventDefault();
+    dispatch(userForgotPassword(email));
   }
+
+  useEffect(()=>{
+    if (error) {
+      dispatch(clearError);
+    }
+    if (isAuthenticated) {
+      navigate("/OtpVerification");
+    }
+  }, [dispatch, error, isAuthenticated])
+
 
   return (
     <>
@@ -32,6 +49,7 @@ const ForgetPassword = () => {
                   Send OTP</button>
 
               </form>
+              {error && <div className='error-message'>{error}</div>}
 
 
           </div>

@@ -1,6 +1,7 @@
 import { User } from "../model/User.js"
 import { sendToken } from "../utils/jwtToken.js"
-import { ErrorHandler } from ".././utils/ErrorHandler.js"
+import { ErrorHandler } from ".././utils/ErrorHandler.js";
+import { sendEmail } from "../utils/SendEmail.js";
 
 
 // User Profile
@@ -116,4 +117,43 @@ export const getAllUsers = async (req, res) => {
             message: error.message
         })
     }
+}
+
+export const forgotPassword = async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
+    //const user =req.body.email ;
+    if (!user) {
+        return res.status(400).json({
+            success: false,
+            message: "User not found!"
+        });
+    }
+    
+    //Generate 6 digit random number
+    const otp = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+
+    //save user who already login
+    await user.save({ validateBeforeSave: false });
+
+    const message = 'Please use the verification code below to sign in. \n\n' + otp + '\n\n\nIf you have not request this, please ignore this email.\n\n\nThanks\nBonStay Team';
+
+    try {
+        await sendEmail({
+            email: user,
+            subject: "BonStay password Recovery",
+            message
+        });
+         return res.status(200).json({
+            success: true,
+            message: 'Email sent to ' + user + ' successfully',
+            user
+        });
+    } catch (error) {
+        await user.save({ validateBeforeSave: false });
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+
 }

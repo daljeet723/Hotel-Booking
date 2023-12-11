@@ -9,7 +9,11 @@ import {
     USER_LOGOUT_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
-    USER_REGISTER_FAIL
+    USER_REGISTER_FAIL,
+    USER_FORGOTPASSWORD_REQUEST,
+    USER_FORGOTPASSWORD_SUCCESS,
+    USER_FORGOTPASSWORD_FAIL,
+    CLEAR_ERRORS
 } from "../constants/UserConstants";
 
 export const UserLogin = (email, password) => async (dispatch) => {
@@ -86,4 +90,34 @@ export const userRegister = (name, address, phoneNo, email, password) => async (
             payload: error.response.data.message
         })
     }
+}
+
+export const userForgotPassword = (email) => async (dispatch) => {
+    try {
+        dispatch({
+            type: USER_FORGOTPASSWORD_REQUEST
+        });
+
+        const config = { headers: { "Content-Type": "application/json" } };
+        const data = await axios.post("api/v1/forgotPassword", {
+            email,
+            config
+        });
+        dispatch({
+            type: USER_FORGOTPASSWORD_SUCCESS,
+            payload: data.data, // Extract the 'data' property from the response ie from redux state
+          });
+          
+    } catch (error) {
+        dispatch({
+            type: USER_FORGOTPASSWORD_FAIL,
+            payload: error.response.data.message
+        });
+    }
+}
+//CLEARING ERRORS
+export const clearError = () => async (dispatch) => {
+    dispatch({
+        type: CLEAR_ERRORS
+    });
 }

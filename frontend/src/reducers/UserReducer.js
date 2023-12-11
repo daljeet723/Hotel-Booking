@@ -22,9 +22,9 @@ export const userReducer = createReducer(initialState, (builder) => {
         })
         .addCase("USER_LOGIN_SUCCESS", (state, action) => {
             state.loading = false;
-    state.message = action.payload.message;
-    state.user = action.payload.user;
-    state.isAuthenticated = true;
+            state.message = action.payload.message;
+            state.user = action.payload.user;
+            state.isAuthenticated = true;
         })
         .addCase("USER_LOGIN_FAIL", (state, action) => {
             handleAuthFail(state, action);
@@ -63,4 +63,27 @@ export const userReducer = createReducer(initialState, (builder) => {
         .addCase("CLEAR_ERRORS", (state) => {
             state.error = null;
         })
+})
+
+export const forgotPasswordReducer = createReducer(initialState, (builder) => {
+    builder
+        .addCase("USER_FORGOTPASSWORD_REQUEST", (state) => {
+            state.loading = true;
+            state.isAuthenticated = false;
+        })
+        .addCase("USER_FORGOTPASSWORD_SUCCESS", (state, action) => {
+            state.loading = false;
+            state.message = action.payload.message; // Extract 'message' property from redux state
+            state.isAuthenticated = true;
+            // state.success = action.payload.success;
+        })
+        .addCase("USER_FORGOTPASSWORD_FAIL", (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+            state.isAuthenticated = false;
+        })
+        .addCase("CLEAR_ERRORS", (state) => {
+            state.error = null;
+        },
+    )
 })
