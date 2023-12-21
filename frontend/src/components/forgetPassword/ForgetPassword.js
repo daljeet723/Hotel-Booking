@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import verifyEmail from "../../Images/verifyEmail.jpg";
-import {clearError, userForgotPassword} from "../../actions/UserActions";
+import {clearError, userForgotPassword, userFoundAction} from "../../actions/UserActions";
 import "./ForgetPassword.css";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,7 +11,7 @@ const ForgetPassword = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
-  const { error, success, isAuthenticated} = useSelector(state => state.forgotPassword)
+  const { error, isAuthenticated, userEmail} = useSelector(state => state.forgotPassword)
 
   const submitHandler =(e)=>{
     e.preventDefault();
@@ -22,10 +22,15 @@ const ForgetPassword = () => {
     if (error) {
       dispatch(clearError);
     }
+    // Check if user is authenticated and has an email
     if (isAuthenticated) {
-      navigate("/OtpVerification");
+      // Dispatch an action to signal that the user is found
+      dispatch(userFoundAction(userEmail));
+
+      // Navigate to the desired page
+      navigate('/OtpVerification');
     }
-  }, [dispatch, error, isAuthenticated])
+  }, [dispatch, error, isAuthenticated,userEmail, navigate])
 
 
   return (

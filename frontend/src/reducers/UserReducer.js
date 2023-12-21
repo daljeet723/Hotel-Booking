@@ -1,8 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { userFoundAction } from "../actions/UserActions";
 
 const initialState = {
     loading: true,
-    error: null
+    error: null,
+    isAuthenticated: false,
+    user: null,
 }
 const handleAuthRequest = (state) => {
     state.loading = true;
@@ -75,15 +78,41 @@ export const forgotPasswordReducer = createReducer(initialState, (builder) => {
             state.loading = false;
             state.message = action.payload.message; // Extract 'message' property from redux state
             state.isAuthenticated = true;
-            // state.success = action.payload.success;
+            state.userEmail = action.payload.userEmail;
         })
         .addCase("USER_FORGOTPASSWORD_FAIL", (state, action) => {
             state.loading = false;
             state.error = action.payload;
             state.isAuthenticated = false;
         })
+        .addCase("VERIFY_OTP_REQUEST", (state) => {
+            state.loading = true;
+            state.otpVerify = false;
+        })
+        .addCase("VERIFY_OTP_SUCCESS", (state, action) => {
+            state.loading = false;
+            state.message = action.payload.message;
+            state.otpVerify = true;
+        })
+        .addCase("VERIFY_OTP_FAILURE", (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+            state.otpVerify = false;
+        })
+
         .addCase("CLEAR_ERRORS", (state) => {
             state.error = null;
-        },
-    )
+        })
+
+})
+
+export const userFoundReducer = createReducer(initialState, (builder) => {
+    builder
+        .addCase(userFoundAction, (state, action) => {
+            state.isAuthenticated = true;
+            state.userEmail = action.payload.userEmail
+        })
+        .addCase("CLEAR_ERRORS", (state) => {
+            state.error = null;
+        })
 })

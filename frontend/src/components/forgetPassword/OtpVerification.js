@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import verifyEmail from "../../Images/verifyEmail.jpg";
 import "./ForgetPassword.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { userVerifyOtp } from '../../actions/UserActions';
 
 
 
-const ForgetPassword = () => {
+const OtpVerification = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [otp, setOtp] = useState(new Array(6).fill(""));
+  const { userEmail } = useSelector(state => state.userFound);
+  const {otpVerify, error} = useSelector(state =>state.forgotPassword);
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
@@ -23,10 +28,17 @@ const ForgetPassword = () => {
     }
   }
 
+  const userEnteredOTPString = otp.join("");
+  const userEnteredOTPNumber = parseInt(userEnteredOTPString, 10);
+
   const handleVerifyAccount = (e) => {
     e.preventDefault();
-    alert("Entered OTP is " + otp.join(""))
+    dispatch(userVerifyOtp(userEnteredOTPNumber,userEmail));
   };
+
+ if(otpVerify){
+  navigate("/resetPassword");
+ }
 
   return (
     <>
@@ -40,7 +52,7 @@ const ForgetPassword = () => {
 
             <form onSubmit={handleVerifyAccount}>
               <h2>OTP Verification</h2>
-              <p>We have sent a code to your email.</p>
+              <p>Code sent to {userEmail}.</p>
               <div className='otp'>
                 {otp.map((data, index) => {
                   return (
@@ -62,6 +74,7 @@ const ForgetPassword = () => {
                 Verify Account</button>
 
             </form>
+            {error && <div className='error-message'>{error}</div>}
 
 
           </div>
@@ -72,6 +85,6 @@ const ForgetPassword = () => {
   )
 }
 
-export default ForgetPassword
+export default OtpVerification
 
 // SOURCE: https://www.youtube.com/watch?v=qf56frPk5lA

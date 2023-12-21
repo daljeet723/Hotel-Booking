@@ -120,7 +120,14 @@ export const getAllUsers = async (req, res) => {
 }
 
 export const forgotPassword = async (req, res) => {
-    const user = await User.findOne({ email: req.body.email });
+    //Generate 6 digit random number
+    const otp = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+
+    const user = await User.findOneAndUpdate(
+        { email: req.body.email }, // Find the user by email
+        { otp: otp }, // Update the user document with the OTP
+        { new: true } // Return the updated user document
+    );
     //const user =req.body.email ;
     if (!user) {
         return res.status(400).json({
@@ -129,31 +136,64 @@ export const forgotPassword = async (req, res) => {
         });
     }
     
-    //Generate 6 digit random number
-    const otp = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+    const userEmail = user.email;
 
     //save user who already login
     await user.save({ validateBeforeSave: false });
+
+    // If you want to store otp in user's session
+    // req.session.otp = otp;
 
     const message = 'Please use the verification code below to sign in. \n\n' + otp + '\n\n\nIf you have not request this, please ignore this email.\n\n\nThanks\nBonStay Team';
 
     try {
         await sendEmail({
-            email: user,
+            email: userEmail,
             subject: "BonStay password Recovery",
             message
         });
-         return res.status(200).json({
+        return res.status(200).json({
             success: true,
-            message: 'Email sent to ' + user + ' successfully',
-            user
+            message: 'Email sent to ' + userEmail + ' successfully',
+            userEmail
         });
     } catch (error) {
-        await user.save({ validateBeforeSave: false });
+        //await user.save({ validateBeforeSave: false });
         return res.status(500).json({
             success: false,
             message: error.message
         })
     }
 
+}
+
+export const verifyOtp = async(req, res) => {
+    try {
+
+        //gtting user otp and email from component
+        const enteredOtp = req.body.enteredOtp;
+        const userEmail= req.body.userEmail;
+
+        //find user in database
+        const user = await User.findOne({email: userEmail});
+
+        //match user entered otp with otp stored in dn
+        if (enteredOtp === user.otp) {
+            return res.status(200).json({
+                success: true,
+                message: 'OTP verified successfully'
+            })
+        }
+        else {
+            return res.status(400).json({
+                success: false,
+                message: 'Sorry, OTP does not match!!'
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
 }

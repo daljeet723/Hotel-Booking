@@ -5,13 +5,14 @@ import thunk from 'redux-thunk';
 //providing a way to connect your Redux store to the DevTools for debugging.
 import {composeWithDevTools} from "redux-devtools-extension";
 import {hotelDetailReducer, hotelsReducer} from "./reducers/HotelReducers.js";
-import { forgotPasswordReducer, userReducer } from "./reducers/UserReducer.js";
+import { forgotPasswordReducer, userFoundReducer, userReducer } from "./reducers/UserReducer.js";
 
 const reducer = combineReducers({
     hotels : hotelsReducer,
     hotelDetail : hotelDetailReducer,
     user : userReducer,
-    forgotPassword : forgotPasswordReducer
+    forgotPassword : forgotPasswordReducer,
+    userFound: userFoundReducer
 
 });
 

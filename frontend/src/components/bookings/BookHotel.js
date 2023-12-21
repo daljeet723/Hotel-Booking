@@ -97,7 +97,7 @@ const BookHotel = () => {
       dispatch(clearError());
     }
     dispatch(hotelDetailAction(id))
-  }, [dispatch, error])
+  }, [dispatch, error,id])
 
 
   return (
