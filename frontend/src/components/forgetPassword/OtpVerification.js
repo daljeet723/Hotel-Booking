@@ -68,6 +68,10 @@ const OtpVerification = () => {
                   );
                 })}
               </div>
+              <div className='resend-otp'>
+                <p>Time remaining: </p>
+                <button type="button">Resend OTP</button>
+              </div>
 
               {/* join otp on click of button */}
               <button type="submit" className='submitBtn'>
