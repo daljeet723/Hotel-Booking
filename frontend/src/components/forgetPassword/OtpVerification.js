@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import verifyEmail from "../../Images/verifyEmail.jpg";
 import "./ForgetPassword.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { userVerifyOtp } from '../../actions/UserActions';
+import { userForgotPassword, userVerifyOtp } from '../../actions/UserActions';
 
 
 
@@ -11,10 +11,15 @@ const OtpVerification = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [otp, setOtp] = useState(new Array(6).fill(""));
-  const { userEmail } = useSelector(state => state.userFound);
-  const {otpVerify, error} = useSelector(state =>state.forgotPassword);
 
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(5);
+
+  const { userEmail } = useSelector(state => state.userFound);
+  const { otpVerify, error } = useSelector(state => state.forgotPassword);
+
+  //Function to set otp in array string 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
 
@@ -31,14 +36,49 @@ const OtpVerification = () => {
   const userEnteredOTPString = otp.join("");
   const userEnteredOTPNumber = parseInt(userEnteredOTPString, 10);
 
+  //function to resend otp
+  const resendOtp = () => {
+   setMinutes(0);
+   setSeconds(10);
+   dispatch(userForgotPassword(userEmail));
+  }
+
+  //function to verify OTP
   const handleVerifyAccount = (e) => {
     e.preventDefault();
-    dispatch(userVerifyOtp(userEnteredOTPNumber,userEmail));
+    dispatch(userVerifyOtp(userEnteredOTPNumber, userEmail));
   };
 
- if(otpVerify){
-  navigate("/resetPassword");
- }
+  if (otpVerify) {
+    navigate("/resetPassword");
+  }
+
+  //set timer for otp
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      //Decrease seconds if greater than 0
+      if(seconds >0){
+        setSeconds(seconds - 1);
+      }
+
+      //When seconds reach 0, decrease minutes if greater than 0
+      if(seconds === 0){
+        if(minutes === 0){
+          //Stop countdown when both mins and seconds reach to 0
+          clearInterval(interval);
+        }
+        else{
+          //Reset seconds to 59, and decrease mins by 1
+          setSeconds(59);
+          setMinutes(minutes - 1);
+        }
+      }
+    },1000);
+    return ()=>{
+      //Cleanup: stop the interval when components unmounts
+      clearInterval(interval);
+    };
+  },[seconds]);// Re-run this effect whenever "seconds" change
 
   return (
     <>
@@ -69,8 +109,19 @@ const OtpVerification = () => {
                 })}
               </div>
               <div className='resend-otp'>
-                <p>Time remaining: </p>
-                <button type="button">Resend OTP</button>
+                <p>Time Left: {" "}
+                  <span style={{ fontWeight: 600 }}>
+                    {minutes < 10 ? `0${minutes}` : minutes}:
+                    {seconds < 10 ? `0${seconds}` : seconds}
+                  </span></p>
+
+                {/* button to resend otp */}
+                <button
+                  disabled={seconds > 0 || minutes > 0}
+                  style={{ color: seconds > 0 || minutes > 0 ? "#B6BBC4" : "#FF5630" }}
+                  onClick={resendOtp}>
+                  Resend OTP
+                </button>
               </div>
 
               {/* join otp on click of button */}
@@ -78,9 +129,8 @@ const OtpVerification = () => {
                 Verify Account</button>
 
             </form>
+
             {error && <div className='error-message'>{error}</div>}
-
-
           </div>
         </div>
       </div>
