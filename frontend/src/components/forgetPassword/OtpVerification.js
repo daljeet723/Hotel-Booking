@@ -13,8 +13,8 @@ const OtpVerification = () => {
   const dispatch = useDispatch();
 
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(5);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(59);
 
   const { userEmail } = useSelector(state => state.userFound);
   const { otpVerify, error } = useSelector(state => state.forgotPassword);
@@ -38,8 +38,8 @@ const OtpVerification = () => {
 
   //function to resend otp
   const resendOtp = () => {
-   setMinutes(0);
-   setSeconds(10);
+   setMinutes(1);
+   setSeconds(59);
    dispatch(userForgotPassword(userEmail));
   }
 
@@ -114,11 +114,13 @@ const OtpVerification = () => {
                     {minutes < 10 ? `0${minutes}` : minutes}:
                     {seconds < 10 ? `0${seconds}` : seconds}
                   </span></p>
+                  <button type="reset" className='reset-otp'
+                  onClick={e=>setOtp([...otp.map(val=>"")])}>Clear</button>
 
                 {/* button to resend otp */}
                 <button
                   disabled={seconds > 0 || minutes > 0}
-                  style={{ color: seconds > 0 || minutes > 0 ? "#B6BBC4" : "#FF5630" }}
+                  style={{ color: seconds > 0 || minutes > 0 ? "#B6BBC4" : "#FF5630" ,textDecoration:"underline"}}
                   onClick={resendOtp}>
                   Resend OTP
                 </button>

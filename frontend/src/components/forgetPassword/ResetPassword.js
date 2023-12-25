@@ -1,29 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import login from "../../Images/login.jpg";
 import "./ResetPassword.css";
+import { userResetPassword } from '../../actions/UserActions';
 
 
 const ForgetPassword = () => {
-  const [oldPassword, setOldPassword] = useState("");
+
+  const dispatch = useDispatch();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showOldPassword, setShowOldPassword] = useState(false);
+
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleShowOldPassword =()=>{
-    setShowOldPassword(!showOldPassword);
-  }
-  const handleShowNewPassword =()=>{
+  const isButtonDisabled = !newPassword || !confirmPassword;
+
+  const { userEmail } = useSelector(state => state.userFound);
+
+ 
+  const handleShowNewPassword = () => {
     setShowNewPassword(!showNewPassword);
   }
-  const handleShowConfirmPassword =()=>{
+  const handleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   }
-  const updatePassword =(e)=>{
+  const updatePassword = (e) => {
     e.preventDefault();
+    dispatch(userResetPassword(newPassword, confirmPassword, userEmail));
 
   }
   return (
@@ -38,16 +44,6 @@ const ForgetPassword = () => {
             <h2>BonStay with Us</h2>
             <div className='reset-form-fields'>
               <form onSubmit={updatePassword}>
-                <input type={showOldPassword ? "text": "password"}
-                  placeholder="Old Password"
-                  value={oldPassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
-                />
-                {showOldPassword ? <RemoveRedEyeOutlinedIcon className='reset-show-password'
-                  onClick={handleShowOldPassword} /> :
-                  <VisibilityOffOutlinedIcon className='reset-show-password'
-                    onClick={handleShowOldPassword} />
-                }
 
                 <input type={showNewPassword ? "text" : "password"}
                   placeholder="New Password"
@@ -59,7 +55,7 @@ const ForgetPassword = () => {
                   <VisibilityOffOutlinedIcon className='reset-show-password'
                     onClick={handleShowNewPassword} />
                 }
-                 <input type={showConfirmPassword ? "text" : "password"}
+                <input type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -69,7 +65,9 @@ const ForgetPassword = () => {
                   <VisibilityOffOutlinedIcon className='reset-show-password'
                     onClick={handleShowConfirmPassword} />
                 }
-                <button type="submit" className='submitBtn'>
+                <button
+                  disabled={isButtonDisabled} type="submit" className='submitBtn'
+                  style={{backgroundColor: isButtonDisabled ? "#B6BBC4" : "#75C2F6"}}>
                   Reset Password</button>
 
               </form>

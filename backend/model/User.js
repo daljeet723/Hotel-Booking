@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
 //If it does, it returns an error, preventing the password from being saved. 
 //Adjust the salt rounds (e.g., 10 in this example) as needed for your security requirements.
 
-userSchema.pre('save', async function (next) {
+userSchema.pre("save", async function (next) {
     // Only hash the password if it's being modified or is new
     if (!this.isModified('password')) {
         return next();

@@ -135,7 +135,7 @@ export const forgotPassword = async (req, res) => {
             message: "User not found!"
         });
     }
-    
+
     const userEmail = user.email;
 
     //save user who already login
@@ -154,7 +154,7 @@ export const forgotPassword = async (req, res) => {
         });
         return res.status(200).json({
             success: true,
-            message: 'Email sent to ' + userEmail + ' successfully',
+            message: 'OTP sent successfully with otp '+otp,
             userEmail
         });
     } catch (error) {
@@ -167,15 +167,15 @@ export const forgotPassword = async (req, res) => {
 
 }
 
-export const verifyOtp = async(req, res) => {
+export const verifyOtp = async (req, res) => {
     try {
 
         //gtting user otp and email from component
         const enteredOtp = req.body.enteredOtp;
-        const userEmail= req.body.userEmail;
+        const userEmail = req.body.userEmail;
 
         //find user in database
-        const user = await User.findOne({email: userEmail});
+        const user = await User.findOne({ email: userEmail });
 
         //match user entered otp with otp stored in dn
         if (enteredOtp === user.otp) {
@@ -190,6 +190,39 @@ export const verifyOtp = async(req, res) => {
                 message: 'Sorry, OTP does not match!!'
             })
         }
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+export const resetPassword = async (req, res) => {
+    try {
+        //Find user in database
+        const email = req.body.userEmail;
+        const user = await User.findOne({email});
+
+        if (req.body.newPassword != req.body.confirmPassword) {
+            return res.send(500).json({
+                success: false,
+                message: "Password does not match!!"
+            })
+        }
+
+        //reset password
+        user.password = req.body.newPassword;
+        user.otp ="";
+
+        await user.save();
+        //immediately login user after change password
+        sendToken(user, 200, res);
+    //    return res.status(200).json({
+    //     success:true,
+    //     message:"Password changes successfully"
+    //    });
+
     } catch (error) {
         return res.status(500).json({
             success: false,

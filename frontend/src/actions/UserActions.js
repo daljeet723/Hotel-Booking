@@ -16,7 +16,10 @@ import {
     VERIFY_OTP_FAILURE,
     VERIFY_OTP_SUCCESS,
     VERIFY_OTP_REQUEST,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    RESET_PASSWORD_REQUEST,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAILURE
 } from "../constants/UserConstants";
 
 export const UserLogin = (email, password) => async (dispatch) => {
@@ -109,8 +112,8 @@ export const userForgotPassword = (email) => async (dispatch) => {
         dispatch({
             type: USER_FORGOTPASSWORD_SUCCESS,
             payload: data.data, // Extract the 'data' property from the response ie from redux state
-          });
-          
+        });
+
     } catch (error) {
         dispatch({
             type: USER_FORGOTPASSWORD_FAIL,
@@ -119,30 +122,51 @@ export const userForgotPassword = (email) => async (dispatch) => {
     }
 }
 
-export const userVerifyOtp =(enteredOtp,userEmail)=>async (dispatch)=>{
+export const userVerifyOtp = (enteredOtp, userEmail) => async (dispatch) => {
     try {
         dispatch({
-            type:VERIFY_OTP_REQUEST
+            type: VERIFY_OTP_REQUEST
         });
 
-        const data = await axios.post("api/v1/verify-otp",{enteredOtp, userEmail});
+        const data = await axios.post("api/v1/verify-otp", { enteredOtp, userEmail });
         dispatch({
-            type:VERIFY_OTP_SUCCESS,
+            type: VERIFY_OTP_SUCCESS,
             payload: data.data
         })
     } catch (error) {
         dispatch({
-            type:VERIFY_OTP_FAILURE,
-            payload: error.response.data.message||"Failed to verify OTP"
+            type: VERIFY_OTP_FAILURE,
+            payload: error.response.data.message || "Failed to verify OTP"
         })
     }
 }
 
-export const userFoundAction = createAction('userFound/userFoundAction', (email) => ({
-    payload:{
-        userEmail:email
+export const userResetPassword = (newPassword, confirmPassword, userEmail) => async (dispatch) => {
+    try {
+        dispatch({
+            type: RESET_PASSWORD_REQUEST
+        })
+
+        const data = await axios.post("api/v1/resetPassword", {
+            newPassword, confirmPassword, userEmail
+        });
+        console.log("reset - "+data);
+        dispatch({
+            type: RESET_PASSWORD_SUCCESS,
+            payload: data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: RESET_PASSWORD_FAILURE,
+            payload: error.response.data.message
+        })
     }
-  }));
+}
+export const userFoundAction = createAction('userFound/userFoundAction', (email) => ({
+    payload: {
+        userEmail: email
+    }
+}));
 
 //CLEARING ERRORS
 export const clearError = () => async (dispatch) => {

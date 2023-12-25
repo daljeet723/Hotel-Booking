@@ -2,6 +2,7 @@ import express from "express";
 import { forgotPassword, 
     getAllUsers, 
     registerUser,
+    resetPassword,
     userLogin, 
     userLogout, 
     verifyOtp} from "../controller/UserController.js";
@@ -15,3 +16,4 @@ userRouter.route("/logout").get(userLogout);
 userRouter.route("/users").get(getAllUsers);
 userRouter.route("/forgotPassword").post(forgotPassword);
 userRouter.route("/verify-otp").post(verifyOtp);
+userRouter.route("/resetPassword").post(resetPassword);

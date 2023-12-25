@@ -85,6 +85,8 @@ export const forgotPasswordReducer = createReducer(initialState, (builder) => {
             state.error = action.payload;
             state.isAuthenticated = false;
         })
+
+
         .addCase("VERIFY_OTP_REQUEST", (state) => {
             state.loading = true;
             state.otpVerify = false;
@@ -100,6 +102,20 @@ export const forgotPasswordReducer = createReducer(initialState, (builder) => {
             state.otpVerify = false;
         })
 
+
+        .addCase("RESET_PASSWORD_REQUEST",(state)=>{
+            state.loading = true;
+        })
+        .addCase("RESET_PASSWORD_SUCCESS",(state,action)=>{
+            state.loading = false;
+            state.message = action.payload.message;
+        })
+        .addCase("RESET_PASSWORD_FAILURE",(state,action)=>{
+            state.loading = false;
+            state.error = action.payload;
+        })
+
+        
         .addCase("CLEAR_ERRORS", (state) => {
             state.error = null;
         })
